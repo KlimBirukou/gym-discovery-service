@@ -1,14 +1,32 @@
 spring:
   application:
-    name: eureka-server
+    name: gym-discovery-server
+  config:
+    import: "configserver:http://gym-config-server:8888"
+  cloud:
+    config:
+      fail-fast: true
+      retry:
+        max-attempts: 6
+        initial-interval: 2000
+        multiplier: 1.5
+        max-interval: 10000
+logging:
+  level:
+    org.springframework.cloud.config.server: DEBUG
+    org.springframework.cloud.native: DEBUG
+    # Если используете файловую систему (native profile):
+    org.springframework.cloud.config.server.resource.GenericResourceRepository: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      base-path: /actuator
+  endpoint:
+    health:
+      show-details: never
 
 server:
   port: 8761
-
-eureka:
-  client:
-    register-with-eureka: false
-    fetch-registry: false
-  server:
-    wait-time-in-ms-when-sync-empty: 0
-    enable-self-preservation: false
