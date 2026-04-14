@@ -1,0 +1,1 @@
+Service registry and discovery node built on Netflix Eureka. Allows microservices to register themselves and locate each other by logical name, abstracting away specific hosts and ports. Starts right after Config Service and serves as the central hub of the entire service topology.
